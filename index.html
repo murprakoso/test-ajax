@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST AJAx</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>TEST AJAX</h1>
+
+    <input type="text" name="message" class="message">
+    <button>Send</button>
+
+    <h1 id="result"></h1>
+
+    <script>
+        // $('button').on('click', function () {
+        //     let message = $('.message').val()
+
+        $.ajax({
+            url: "ajax/proses.php",
+            type: "GET",
+            success: function (response) {
+                let result = $('#result')
+                let kota = JSON.parse(response);
+                // console.log(kota)
+
+                // kota.forEach((negara, ibu_kota) => {
+                //     result.html(negara)
+                // });
+
+                for (const key in kota) {
+                    console.log(`${key}: ${kota[key]}`);
+                    // console.log(key)
+                    result.append(`
+                        <span>
+                            Ibu kota : ${key} ,Negara : ${kota[key]}
+                        </span><br>
+                    `)
+
+                }
+            }
+        });
+        // })
+    </script>
+</body>
+
+</html>
